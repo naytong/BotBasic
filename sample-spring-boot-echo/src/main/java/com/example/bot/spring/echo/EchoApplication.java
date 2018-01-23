@@ -35,8 +35,11 @@ public class EchoApplication {
 
     @EventMapping
     public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
-        System.out.println("event: " + event);
-        return new TextMessage("Todo ::"+event.getMessage().getText());
+       String result ="";
+		if(event.getMessage().getText().equals("555")){
+			result = "test ";
+		}
+        return new TextMessage(result+event.getMessage().getText());
     }
 
     @EventMapping
