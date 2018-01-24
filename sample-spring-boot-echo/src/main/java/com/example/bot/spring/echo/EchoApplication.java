@@ -76,7 +76,7 @@ public class EchoApplication {
 			result = str.toString();
 		}
 
-		if(text.equals("RsShop ออกไป") {
+		if(text.equals("RsShop ออกไป")) {
                 Source source = event.getSource();
                 if (source instanceof GroupSource) {
                     this.replyText(replyToken, "Leaving group");
