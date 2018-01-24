@@ -29,15 +29,19 @@ import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 @SpringBootApplication
 @LineMessageHandler
 public class EchoApplication {
+	@Autowired
+    private LineMessagingClient lineMessagingClient;
+
     public static void main(String[] args) {
         SpringApplication.run(EchoApplication.class, args);
     }
 
     @EventMapping
     public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
+	   String text = event.getMessage().getText();
        String result ="";
-		if(event.getMessage().getText().indexOf("บัญชี")!=-1 || 
-				event.getMessage().getText().indexOf("บช")!=-1){
+		if(text.indexOf("บัญชี")!=-1 || 
+				text.indexOf("บช")!=-1){
 			StringBuilder str = new StringBuilder();
 			str.append("กสิกรไทย\n" + 
 					"6192018313\n" + 
@@ -46,7 +50,7 @@ public class EchoApplication {
 			result = str.toString();
 		}
 		
-		if(event.getMessage().getText().indexOf("ไทเท")!=-1){
+		if(text.indexOf("ไทเท")!=-1){
 			StringBuilder str = new StringBuilder();
 			str.append("สนใจน็อต size ไหนขนาดเท่าไหร่ครับ ");
 			str.append("M5x10-13-17-20-35 \n" + 
@@ -59,11 +63,48 @@ public class EchoApplication {
 				"M8 30mm 250 35mm 280");
 			result = str.toString();
 		}
+
+		if(text.equals("RsShop ออกไป") {
+                Source source = event.getSource();
+                if (source instanceof GroupSource) {
+                    this.replyText(replyToken, "Leaving group");
+                    lineMessagingClient.leaveGroup(((GroupSource) source).getGroupId()).get();
+                } else if (source instanceof RoomSource) {
+                    this.replyText(replyToken, "Leaving room");
+                    lineMessagingClient.leaveRoom(((RoomSource) source).getRoomId()).get();
+                } else {
+                    this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+                }
+             
+        }
+
 		return new TextMessage(result);
     }
 
     @EventMapping
     public void handleDefaultMessageEvent(Event event) {
         System.out.println("event: " + event);
+    }
+
+	@EventMapping
+    public void handleStickerMessageEvent(MessageEvent<StickerMessageContent> event) {
+        handleSticker(event.getReplyToken(), event.getMessage());
+    }
+
+    @EventMapping
+    public void handleLocationMessageEvent(MessageEvent<LocationMessageContent> event) {
+        LocationMessageContent locationMessage = event.getMessage();
+        reply(event.getReplyToken(), new LocationMessage(
+                locationMessage.getTitle(),
+                locationMessage.getAddress(),
+                locationMessage.getLatitude(),
+                locationMessage.getLongitude()
+        ));
+    }
+
+	private void handleSticker(String replyToken, StickerMessageContent content) {
+        reply(replyToken, new StickerMessage(
+                content.getPackageId(), content.getStickerId())
+        );
     }
 }
