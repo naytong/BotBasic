@@ -36,10 +36,30 @@ public class EchoApplication {
     @EventMapping
     public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
        String result ="";
-		if(event.getMessage().getText().equals("555")){
-			result = "test ";
+		if(event.getMessage().getText().indexOf("บัญชี")!=-1 || 
+				event.getMessage().getText().indexOf("บช")!=-1){
+			StringBuilder str = new StringBuilder();
+			str.append("กสิกรไทย\n" + 
+					"6192018313\n" + 
+					"ธีรวัฒน์ ภาสวงศ์ตระกูล\n" + 
+					"หรือ Prompay (พร้อมเพย์) 0894879738");
+			result = str.toString();
 		}
-        return new TextMessage(result+event.getMessage().getText());
+		
+		if(event.getMessage().getText().indexOf("ไทเท")!=-1){
+			StringBuilder str = new StringBuilder();
+			str.append("สนใจน็อต size ไหนขนาดเท่าไหร่ครับ ");
+			str.append("M5x10-13-17-20-35 \n" + 
+				"M6x10-20-25-30-35-40-45-50-65\n" + 
+				"M8x30-35\n" + 
+				"M10 pre oder\n" + 
+				"\n" + 
+				"M5 เริ่มต้น 140 ครับ ขยับ size ละ 10 บาท\n" + 
+				"M6 เริ่มต้น 150 ครับ ขยับ size ละ 10 บาท\n" + 
+				"M8 30mm 250 35mm 280");
+			result = str.toString();
+		}
+		return new TextMessage(result);
     }
 
     @EventMapping
