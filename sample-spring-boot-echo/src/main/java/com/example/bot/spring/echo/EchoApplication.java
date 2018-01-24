@@ -36,26 +36,26 @@ public class EchoApplication {
     @EventMapping
     public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
        String result ="";
-		if(event.getMessage().getText().indexOf("∫—≠™’")!=-1 || 
-				event.getMessage().getText().indexOf("∫™")!=-1){
+		if(event.getMessage().getText().indexOf("‡∏ö‡∏±‡∏ç‡∏ä‡∏µ")!=-1 || 
+				event.getMessage().getText().indexOf("‡∏ö‡∏ä")!=-1){
 			StringBuilder str = new StringBuilder();
-			str.append("° ‘°√‰∑¬\n" + 
+			str.append("‡∏Å‡∏™‡∏¥‡∏Å‡∏£‡πÑ‡∏ó‡∏¢\n" + 
 					"6192018313\n" + 
-					"∏’√«—≤πÏ ¿“ «ß»Ïµ√–°Ÿ≈\n" + 
-					"À√◊Õ Prompay (æ√ÈÕ¡‡æ¬Ï) 0894879738");
+					"‡∏ò‡∏µ‡∏£‡∏ß‡∏±‡∏í‡∏ô‡πå ‡∏†‡∏≤‡∏™‡∏ß‡∏á‡∏®‡πå‡∏ï‡∏£‡∏∞‡∏Å‡∏π‡∏•\n" + 
+					"‡∏´‡∏£‡∏∑‡∏≠ Prompay (‡∏û‡∏£‡πâ‡∏≠‡∏°‡πÄ‡∏û‡∏¢‡πå) 0894879738");
 			result = str.toString();
 		}
 		
-		if(event.getMessage().getText().indexOf("‰∑‡∑")!=-1){
+		if(event.getMessage().getText().indexOf("‡πÑ‡∏ó‡πÄ‡∏ó")!=-1){
 			StringBuilder str = new StringBuilder();
-			str.append(" π„®πÁÕµ size ‰Àπ¢π“¥‡∑Ë“‰À√Ë§√—∫ ");
+			str.append("‡∏™‡∏ô‡πÉ‡∏à‡∏ô‡πá‡∏≠‡∏ï size ‡πÑ‡∏´‡∏ô‡∏Ç‡∏ô‡∏≤‡∏î‡πÄ‡∏ó‡πà‡∏≤‡πÑ‡∏´‡∏£‡πà‡∏Ñ‡∏£‡∏±‡∏ö ");
 			str.append("M5x10-13-17-20-35 \n" + 
 				"M6x10-20-25-30-35-40-45-50-65\n" + 
 				"M8x30-35\n" + 
 				"M10 pre oder\n" + 
 				"\n" + 
-				"M5 ‡√‘Ë¡µÈπ 140 §√—∫ ¢¬—∫ size ≈– 10 ∫“∑\n" + 
-				"M6 ‡√‘Ë¡µÈπ 150 §√—∫ ¢¬—∫ size ≈– 10 ∫“∑\n" + 
+				"M5 ‡πÄ‡∏£‡∏¥‡πà‡∏°‡∏ï‡πâ‡∏ô 140 ‡∏Ñ‡∏£‡∏±‡∏ö ‡∏Ç‡∏¢‡∏±‡∏ö size ‡∏•‡∏∞ 10 ‡∏ö‡∏≤‡∏ó\n" + 
+				"M6 ‡πÄ‡∏£‡∏¥‡πà‡∏°‡∏ï‡πâ‡∏ô 150 ‡∏Ñ‡∏£‡∏±‡∏ö ‡∏Ç‡∏¢‡∏±‡∏ö size ‡∏•‡∏∞ 10 ‡∏ö‡∏≤‡∏ó\n" + 
 				"M8 30mm 250 35mm 280");
 			result = str.toString();
 		}
