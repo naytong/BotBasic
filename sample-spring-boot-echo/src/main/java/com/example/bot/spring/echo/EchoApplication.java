@@ -91,10 +91,10 @@ public class EchoApplication {
                 Source source = event.getSource();
                 if (source instanceof GroupSource) {
                     this.replyText(replyToken, "Leaving group");
-                    lineMessagingClient.leaveGroup(((GroupSource) source).getGroupId()).get();
+                    lineMessagingClient.leaveGroup(((GroupSource) source).getSenderId()).get();
                 } else if (source instanceof RoomSource) {
                     this.replyText(replyToken, "Leaving room");
-                    lineMessagingClient.leaveRoom(((RoomSource) source).getRoomId()).get();
+                    lineMessagingClient.leaveRoom(((RoomSource) source).getSenderId()).get();
                 } else {
                     this.replyText(replyToken, "Bot can't leave from 1:1 chat");
                 }
