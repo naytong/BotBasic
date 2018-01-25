@@ -59,18 +59,24 @@ public class EchoApplication {
     }
 
     @EventMapping
-    public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
-	   String text = event.getMessage().getText();
-	   String replyToken = event.getReplyToken();
-       String result ="";
-		if(text.indexOf("บัญชี")!=-1 || 
+    public void handleTextMessageEvent(MessageEvent<TextMessageContent> event) throws Exception {
+        TextMessageContent message = event.getMessage();
+        handleTextContent(event.getReplyToken(), event, message);
+    }
+    
+    private void handleTextContent(String replyToken, Event event, TextMessageContent content)
+            throws Exception {
+        String text = content.getText();
+
+        if(text.indexOf("บัญชี")!=-1 || 
 				text.indexOf("บช")!=-1){
 			StringBuilder str = new StringBuilder();
 			str.append("กสิกรไทย\n" + 
 					"6192018313\n" + 
 					"ธีรวัฒน์ ภาสวงศ์ตระกูล\n" + 
 					"หรือ Prompay (พร้อมเพย์) 0894879738");
-			result = str.toString();
+			
+			this.replyText(replyToken, str.toString());
 		}
 		
 		if(text.indexOf("ไทเท")!=-1){
@@ -84,7 +90,7 @@ public class EchoApplication {
 				"M5 เริ่มต้น 140 ครับ ขยับ size ละ 10 บาท\n" + 
 				"M6 เริ่มต้น 150 ครับ ขยับ size ละ 10 บาท\n" + 
 				"M8 30mm 250 35mm 280");
-			result = str.toString();
+			this.replyText(replyToken, str.toString());
 		}
 
 		if(text.equals("RsShop ออกไป")) {
@@ -100,9 +106,17 @@ public class EchoApplication {
                 }
              
         }
-
-		return new TextMessage(result);
     }
+    
+//    @EventMapping
+//    public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
+//	   String text = event.getMessage().getText();
+//	   String replyToken = event.getReplyToken();
+//       String result ="";
+//		
+//
+//		return new TextMessage(result);
+//    }
 
     @EventMapping
     public void handleDefaultMessageEvent(Event event) {
@@ -131,16 +145,6 @@ public class EchoApplication {
         );
     }
 
-	private void replyText(@NonNull String replyToken, @NonNull String message) {
-        if (replyToken.isEmpty()) {
-            throw new IllegalArgumentException("replyToken must not be empty");
-        }
-        if (message.length() > 1000) {
-            message = message.substring(0, 1000 - 2) + "……";
-        }
-        this.reply(replyToken, new TextMessage(message));
-    }
-
 	private void reply(@NonNull String replyToken, @NonNull Message message) {
         reply(replyToken, Collections.singletonList(message));
     }
@@ -150,9 +154,19 @@ public class EchoApplication {
             BotApiResponse apiResponse = lineMessagingClient
                     .replyMessage(new ReplyMessage(replyToken, messages))
                     .get();
-           
+          
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void replyText(@NonNull String replyToken, @NonNull String message) {
+        if (replyToken.isEmpty()) {
+            throw new IllegalArgumentException("replyToken must not be empty");
+        }
+        if (message.length() > 1000) {
+            message = message.substring(0, 1000 - 2) + "……";
+        }
+        this.reply(replyToken, new TextMessage(message));
     }
 }
