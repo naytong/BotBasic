@@ -27,7 +27,7 @@ import com.linecorp.bot.model.event.Event;
 import com.linecorp.bot.model.event.MessageEvent;
 import com.linecorp.bot.model.event.message.TextMessageContent;
 import com.linecorp.bot.model.message.TextMessage;
-
+import com.linecorp.bot.model.response.BotApiResponse;
 import com.linecorp.bot.model.event.source.GroupSource;
 import com.linecorp.bot.model.event.source.RoomSource;
 import com.linecorp.bot.model.event.source.Source;
@@ -41,6 +41,8 @@ import com.linecorp.bot.model.message.LocationMessage;
 import com.linecorp.bot.spring.boot.annotation.EventMapping;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 
+import lombok.NonNull;
+import lombok.Value;
 
 @SpringBootApplication
 @LineMessageHandler
@@ -55,6 +57,7 @@ public class EchoApplication {
     @EventMapping
     public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
 	   String text = event.getMessage().getText();
+	   String replyToken = event.getReplyToken();
        String result ="";
 		if(text.indexOf("บัญชี")!=-1 || 
 				text.indexOf("บช")!=-1){
