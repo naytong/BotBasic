@@ -36,7 +36,10 @@ public class EchoApplication {
     @EventMapping
     public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
        String result ="";
-		if(event.getMessage().getText().indexOf("บัญชี")!=-1 || 
+        if(event.getMessage().getText().indexOf("ดีครับ")!=-1 || 
+				event.getMessage().getText().indexOf("ดีคับ")!=-1){
+        	result = "สวัสดีครับ RsShop ยินดีต้อนรับ สอบถามเกี่ยวกับสินค้าตัวไหนครับ ";
+        }else if(event.getMessage().getText().indexOf("บัญชี")!=-1 || 
 				event.getMessage().getText().indexOf("บช")!=-1){
 			StringBuilder str = new StringBuilder();
 			str.append("กสิกรไทย\n" + 
@@ -44,9 +47,7 @@ public class EchoApplication {
 					"ธีรวัฒน์ ภาสวงศ์ตระกูล\n" + 
 					"หรือ Prompay (พร้อมเพย์) 0894879738");
 			result = str.toString();
-		}
-		
-		if(event.getMessage().getText().indexOf("ไทเท")!=-1){
+		}else if(event.getMessage().getText().indexOf("ไทเท")!=-1){
 			StringBuilder str = new StringBuilder();
 			str.append("สนใจน็อต size ไหนขนาดเท่าไหร่ครับ ");
 			str.append("M5x10-13-17-20-35 \n" + 
@@ -58,6 +59,13 @@ public class EchoApplication {
 				"M6 เริ่มต้น 150 ครับ ขยับ size ละ 10 บาท\n" + 
 				"M8 30mm 250 35mm 280");
 			result = str.toString();
+		}else if(event.getMessage().getText().indexOf("มีรูปมั้ย")!=-1){
+			result = "เดี๋ยวหาก่อนครับ ฝากติดตามเพจด้วยครับผม https://www.facebook.com/Mazda2RotaryShop/";
+		}else if(event.getMessage().getText().indexOf("ขอเบอร์โทร")!=-1 || 
+				event.getMessage().getText().indexOf("ขอเบอโทร")!=-1){
+			result = "0894879738 ครับ";
+		}else if(event.getMessage().getText().indexOf("มีเพจมั้ย")!=-1){
+			result = "https://www.facebook.com/Mazda2RotaryShop/";
 		}
 		return new TextMessage(result);
     }
