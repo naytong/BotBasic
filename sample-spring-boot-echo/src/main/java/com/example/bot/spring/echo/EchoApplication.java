@@ -66,6 +66,14 @@ public class EchoApplication {
 			result = "0894879738 ครับ";
 		}else if(event.getMessage().getText().indexOf("มีเพจมั้ย")!=-1){
 			result = "https://www.facebook.com/Mazda2RotaryShop/";
+		}else if(event.getMessage().getText().indexOf("ถุยยย")!=-1){
+			result = "ไม่สุภาพเลยนะครับ กรุณาใช้ถ้อยคำที่สุภาพหน่อยครับ ผมเป็น Bot ก็มีหัวใจนะครับ";
+		}else if(event.getMessage().getText().indexOf("ถามแฟนก่อน")!=-1){
+			result = "ทีหลังรบกวนถามแฟนมาให้เรียบร้อยก่อนนะครับ ตอบแทบตาย สุดท้าย ถามแฟนก่อน อุ๊ย ขออภัยครับ ผมเป็น Botนะ";
+		}else if(event.getMessage().getText().indexOf("ไอ้สัส")!=-1){
+			result = "ขอบคุณครับ ผมขอเป็นแมวน้ำนะ น่ารักดี อุ๋ง อุ๋ง";
+		}else if(event.getMessage().getText().indexOf("ไอ้เหี้ย")!=-1){
+			result = "สงสารมันนะครับ มันไม่ได้ทำอะไรผิดเลย";
 		}
 		return new TextMessage(result);
     }
