@@ -74,6 +74,10 @@ public class EchoApplication {
 			result = "ขอบคุณครับ ผมขอเป็นแมวน้ำนะ น่ารักดี อุ๋ง อุ๋ง";
 		}else if(event.getMessage().getText().indexOf("ไอ้เหี้ย")!=-1){
 			result = "สงสารมันนะครับ มันไม่ได้ทำอะไรผิดเลย";
+		}else if(event.getMessage().getText().indexOf("ขอเงินหน่อย")!=-1){
+			result = "ไปทำงานหาเงิน เอาเองสิครับ";		
+		}else if(event.getMessage().getText().indexOf("น็อตฟรี")!=-1){
+			result = "ไม่มีครับ ของซื้อของขายนะ";						
 		}
 		return new TextMessage(result);
     }
